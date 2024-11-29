@@ -1,4 +1,4 @@
-namespace PlaywrightXunit
+namespace PlaywrightXunitTest
 {
     public class UnitTest1
     {
