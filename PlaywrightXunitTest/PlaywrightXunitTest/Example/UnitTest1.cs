@@ -1,6 +1,6 @@
 using Microsoft.Playwright;
 
-namespace PlaywrightXunitTest
+namespace PlaywrightXunitTest.Example
 {
     public class UnitTest1
     {
