@@ -2,6 +2,15 @@
 
 namespace PlaywrightXunitTest.Example
 {
+    //This class will use the PlaywrightFixture to setup the browser instance
+    //and dispose of the browser instance after the each test execution is completed
+    //because we inheritance from IAsyncLifetime to implement the InitializeAsync and DisposeAsync
+    //therefore the browser instance will be create in InitializeAsync when start each test
+    //and disposed after each test execution in DisposeAsync m
+
+
+
+
     //Use Collection attribute to apply the PlaywrightFixture to the test class
     //Inherit the IAsyncLifetime to implement the InitializeAsync and DisposeAsync methods
     [Collection("Playwright collection")]

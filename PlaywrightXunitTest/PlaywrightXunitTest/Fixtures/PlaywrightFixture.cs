@@ -52,6 +52,9 @@ namespace PlaywrightXunitTest.Fixtures
 
 
     }
+
+    //Use CollectionDefinition attribute to apply the PlaywrightFixture to the test class => [CollectionDefinition("Playwright collection")]
+    //To use it call Collection in test class  => [Collection("Playwright collection")]
     [CollectionDefinition("Playwright collection")]
     public class PlaywrightCollection : ICollectionFixture<PlaywrightFixture>
     {
