@@ -4,6 +4,12 @@ namespace PlaywrightXunitTest.Example
 {
     public class UnitTest1
     {
+        /// <summary>
+        /// This is a simple test that navigates to google.com and asserts the title
+        /// Which using Playwright with out using Fixture
+        /// To show project it working to start with
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task Test1()
         {

@@ -3,7 +3,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 
-namespace PlaywrightXunitTest.Test
+namespace PlaywrightXunitTest.Fixtures
 {
     public class PlaywrightFixture : IAsyncLifetime
     {
@@ -11,15 +11,15 @@ namespace PlaywrightXunitTest.Test
         //and dispose of the browser instance after the test execution is completed but not disposed between each rthe tests
         //create the instance of the browser
         public IBrowser Browser { get; set; } = null!;
-        private IPlaywright PlaywrightInstance { get; set; } = null!;       
+        private IPlaywright PlaywrightInstance { get; set; } = null!;
         public IBrowserContext BrowserContext { get; set; } = null!;
         public IConfiguration Configuration { get; set; } = null!;
 
         //implement the InitializeAsync method from IAsyncLifetime
         public async Task InitializeAsync()
         {
-            PlaywrightInstance = await Microsoft.Playwright.Playwright.CreateAsync();
-            Browser = await PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });            
+            PlaywrightInstance = await Playwright.CreateAsync();
+            Browser = await PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
             BrowserContext = await Browser.NewContextAsync();
             Configuration = GetConfiguration();
         }
@@ -41,10 +41,10 @@ namespace PlaywrightXunitTest.Test
         //add file to the project level so right-click on the project and add new item and select "appsettings.json" file
         private IConfiguration GetConfiguration()
         {
-           var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                 .AddEnvironmentVariables();
 
 
             return builder.Build();
