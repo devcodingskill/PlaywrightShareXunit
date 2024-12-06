@@ -39,18 +39,25 @@ namespace PlaywrightXunitTest.Fixtures
 
         //Add "appsettings.json" file to the project and set the properties to "Copy to output directory" to "Copy if newer"
         //add file to the project level so right-click on the project and add new item and select "appsettings.json" file
+
+        //Add user secrets to the project to store the sensitive data like username and password
+        //1 Need to install the Microsoft.Extensions.Configuration.UserSecrets package
+        //2 Right-click on the project and select "Manage User Secrets" and add the sensitive data to the secrets.json file
+        //3 Add the secrets.json file to the project level so right-click on the project and add existing item and select the secrets.json file
+        //4 Make the class for model to call the secrets.json file in configuration => UserSecrets.cs in the Models folder
+        //5 Add the UserSecrets class to the configuration in the PlaywrightFixture.cs file to get the configuration values
+        //6 To check it works => add breakpoint in the InitializeAsync method and check the configuration values then run the test it will show the configuration values
         private IConfiguration GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
                  .SetBasePath(Directory.GetCurrentDirectory())
                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                 .AddUserSecrets<Models.UserSecrets>()
                  .AddEnvironmentVariables();
 
 
             return builder.Build();
         }
-
-
     }
 
     //Use CollectionDefinition attribute to apply the PlaywrightFixture to the test class => [CollectionDefinition("Playwright collection")]
