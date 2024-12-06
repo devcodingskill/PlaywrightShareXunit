@@ -22,6 +22,14 @@ namespace PlaywrightXunitTest.Fixtures
             Browser = await PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
             BrowserContext = await Browser.NewContextAsync();
             Configuration = GetConfiguration();
+
+
+            //this for testing the configuration values
+            var username = Configuration["username"];
+            var emailPrefix = Configuration[ "SsoEmailPrefix"];
+            var EmailDomain = Configuration[ "SsoEmailDomain"];
+            var Password = Configuration[ "SsoPassword"];
+  
         }
         //implement the DisposeAsync method from IAsyncLifetime
         public async Task DisposeAsync()
@@ -46,7 +54,7 @@ namespace PlaywrightXunitTest.Fixtures
         //3 Add the secrets.json file to the project level so right-click on the project and add existing item and select the secrets.json file
         //4 Make the class for model to call the secrets.json file in configuration => UserSecrets.cs in the Models folder
         //5 Add the UserSecrets class to the configuration in the PlaywrightFixture.cs file to get the configuration values
-        //6 To check it works => add breakpoint in the InitializeAsync method and check the configuration values then run the test it will show the configuration values
+        //6 To check it works => add breakpoint in the InitializeAsync method and check the configuration values then run the test it will show the configuration values => Configuration["username"]
         private IConfiguration GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
